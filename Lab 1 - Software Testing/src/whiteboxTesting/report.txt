@@ -1,0 +1,22 @@
+Insert
+Found a bug were the break statements inside the if-clauses causes the method to always reach the last line,
+this makes it to add an element when not supposed to.
+
+Fix: Replacing break with return
+
+Member
+No bug found
+
+Section
+Found a bug were the index for the original set is incremented even though an elements was removed from it. 
+This will make it jump over the next element and may lead to that an element that was supposed to be removed, stays.
+
+Fix:Remove i++ inside the first if-clause
+
+ContainsArithTriple
+Found a bug were member(2 * a.get(i) - a.get(j)) always will return true.
+This is because when j and i is equal to 0,
+ "2 * a.get(i) - a.get(j)" will take the first element times two minus itself witch equals itself. 
+ And of course the elements exists that gives the return value true from member.
+ 
+Fix: change the loop condition in the second for-node to j < i from j <= i
