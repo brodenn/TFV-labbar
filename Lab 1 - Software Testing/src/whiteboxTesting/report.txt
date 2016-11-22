@@ -9,7 +9,7 @@ No bug found
 
 Section
 Found a bug were the index for the original set is incremented even though an elements was removed from it. 
-This will make it jump over the next element and may lead to that an element that was supposed to be removed, stays.
+This will make it jump over the next element and may lead to that an element that was supposed to be removed, still exists.
 
 Fix:Remove i++ inside the first if-clause
 

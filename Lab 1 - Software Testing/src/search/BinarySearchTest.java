@@ -21,10 +21,12 @@ public class BinarySearchTest {
 		int right = array.length - 1;
 		while (left <= right) {
 			int index = (right + left) / 2;
-		      if (array[index] < value)
-		          right = index - 1;
-		        else
-		  	left = index + 1;
+			if (array[index] == value)
+				return true;
+			if (array[index] < value)
+				left = index + 1;
+			else
+				right = index - 1;
 		}
 		return false;
 	}
