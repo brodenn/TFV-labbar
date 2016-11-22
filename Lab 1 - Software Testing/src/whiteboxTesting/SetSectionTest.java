@@ -15,9 +15,9 @@ public class SetSectionTest {
 		deletionSet = new Set();
 	}
 
-	// Statement and branch coverage
+	// Statement coverage
 	@Test
-	public void testDeletion() {
+	public void testSectionExists() {
 		set.insert(5);
 		deletionSet.insert(5);
 		set.section(deletionSet);
@@ -26,7 +26,7 @@ public class SetSectionTest {
 	}
 
 	@Test
-	public void testNoDeletion() {
+	public void testSectionLarger() {
 		set.insert(2);
 		deletionSet.insert(3);
 		set.section(deletionSet);
@@ -34,11 +34,12 @@ public class SetSectionTest {
 		assertTrue(set.toArray().length == 1);
 	}
 
+	
+	//branch coverage
 	@Test
-	public void testDeletionMany() {
+	public void testSectionMany() {
 		set.insert(1);
 		set.insert(2);
-		set.insert(3);
 		set.insert(4);
 		set.insert(5);
 		set.insert(6);

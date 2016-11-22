@@ -14,8 +14,6 @@ public class SetInsertTest {
 	}
 
 	// Statement coverage
-	
-
 	@Test public void testInsertExists() {
 		set.insert(100);
 		set.insert(100);
@@ -25,34 +23,25 @@ public class SetInsertTest {
 	}
 	
 	
-	@Test public void testInsertNonEmpty() {
+	@Test public void testInsertLarger() {
 		set.insert(50);
 		set.insert(60);
-		set.insert(70);
 
 		assertTrue(set.toArray()[0] == 50);
 		assertTrue(set.toArray()[1] == 60);
-		assertTrue(set.toArray()[2] == 70);
-		assertTrue(set.toArray().length == 3);
+		assertTrue(set.toArray().length == 2);
 	}
 
-	
-	@Test public void testInsertEmpty() {
-		set.insert(5);
-		assertTrue(set.toArray()[0] == 5);
-		assertTrue(set.toArray().length == 1);
-	}
-	
 	// Branch coverage
 	@Test public void testInsert() {
-		set.insert(32);
-		set.insert(67);
-		set.insert(56);
-		set.insert(56);
+		set.insert(30);
+		set.insert(40);
+		set.insert(40);
+		set.insert(20);
 
 		assertTrue(set.toArray().length == 3);
-		assertTrue(set.toArray()[0] == 32);
-		assertTrue(set.toArray()[1] == 56);
-		assertTrue(set.toArray()[2] == 67);
+		assertTrue(set.toArray()[0] == 20);
+		assertTrue(set.toArray()[1] == 30);
+		assertTrue(set.toArray()[2] == 40);
 	}
 }

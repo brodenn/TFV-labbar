@@ -11,26 +11,27 @@ public class SetMemberTest {
 
 	@Before public void setUp() {
 		set = new Set();
+		set.insert(10);
+		set.insert(20);
+		set.insert(30);
 	}
 
-  // Statement and branch coverage
+  // Statement coverage
 	
 	@Test public void testMemberExists() {
-		set.insert(10);
 		assertTrue(set.member(10));
+		
 	}
 	
-	@Test public void testMemberNotExists() {
-		set.insert(20);
-		assertFalse(set.member(10));
+	@Test public void testMemberLargerExists() {
+		assertTrue(set.member(20));
 	}
-
+	
+	//branch coverage
 	@Test public void testMember() {
-		set.insert(1);
-		set.insert(4);
-		set.insert(3);
-
-		assertFalse(set.member(2));
-		assertTrue(set.member(4));
+		assertFalse(set.member(5));
+		assertTrue(set.member(10));
+		assertTrue(set.member(20));
+		assertFalse(set.member(40));
 	}
 }
