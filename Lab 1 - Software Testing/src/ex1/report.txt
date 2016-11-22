@@ -1,0 +1,110 @@
+1.a)
+
+Input space: employee != null
+
+Note: These values are going to be in all tests, exception is where one or more values are changed for the relevant test (which is stated in each input). 
+Also, the size value shall be estimated as the maximum value available, because with Integer.MAX_VALUE we will get an error OutOfMemoryException. 
+In the test cases that reveal bugs, have been altered to succed the test and the real assertion test commented out. A comment above the test case shows where the bug is shown for convinience.  
+"starttime = 1, endttime = 10, size = 40 , employee = "Golf", requiredNumber = 4, workingEmployees() == {Alfa, Beta, Charlie}"
+
+Partitions: With the partitions, we are testing according to the assignment to see if one condition for false is met then it should return false. 
+And we need also one partition to see that the method suceeds meeting all criterias and should return true. 
+
+Partition #1: starttime < 0
+   test_addWorkingPeriod_part1: input: "starttime = -10", expected: "addWorkingPeriod(String employee, int starttime, int endtime) = "False" 
+
+Partition #2: starttime > endtime 
+   test_addWorkingPeriod_part2: "input: "starttime = 3, endtime = 1", expected: "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+
+Partition #3: endtime >= size 
+   test_addWorkingPeriod_part3: "input: " endtime = 42 ", expected: "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+
+Partition #4: workingEmployees() => requiredNumber
+   test_addWorkingPeriod_part4: "input: " addWorkingPeriod("Fanta",starttime,endtime)
+addWorkingPeriod("Hotel",starttime,endtime);",expected: "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+
+Partition #5: If employee exist in workingEmployees()
+   test_addWorkingPeriod_part5: "input: employee = "Beta", expected: "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+
+Partition #6: starttime >= 0 && starttime <= endtime < size && workingEmployees() < requiredNumber && If employee doesn´t exist in workingEmployees()
+test_addWorkingPeriod_part6: "input: (Values from Note)", expected: "addWorkingPeriod(String employee, int starttime, int endtime) = "True"
+
+Border cases:
+(starttime <0)
+    test_ addWorkingPeriod _border1_1: input: "starttime = MIN_INT, endtime = 0”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+    test_ addWorkingPeriod _border1_2: input: "starttime = -1 endtime = 0", 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+    test_ addWorkingPeriod _border1_3: input: "starttime = 0, endtime =0”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "True"
+
+(endtime >= size)
+Note: If endtime in setRequiredNumber equals size, we get the error ArrayIndexOutOfBound.
+
+   test_ addWorkingPeriod _border2_1: input: "starttime = 0, endtime = 2, size = 2”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+   test_ addWorkingPeriod _border2_2: input: "starttime = size-2, endtime = size”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+   test_ addWorkingPeriod _border2_3: input: "starttime = size-2, endtime = size+1” size =39, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+   test_ addWorkingPeriod _border2_4: input: "starttime = size-2, endtime = size-1”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "True"
+
+(starttime > endttime)
+    test_ addWorkingPeriod _border3_1: input: "starttime = 1, endtime = 0”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+   test_ addWorkingPeriod _border3_2: input: "starttime = size, endtime = size-1”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+   test_ addWorkingPeriod _border3_3: input: "starttime = (size-1) = endtime”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "True"
+
+(workingEmployees() => requiredNumber)
+   test_ addWorkingPeriod _border4_1: input:" workingEmployees() == 1, requiredNumber  = 1 ”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+   test_ addWorkingPeriod _border4_2: input:" workingEmployees() == 2 , requiredNumber  = 1”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "False"
+   test_ addWorkingPeriod _border4_3: input:" workingEmployees() == 2 , requiredNumber  = 3”, 
+expected:  "addWorkingPeriod(String employee, int starttime, int endtime) = "True"
+
+Found bugs: One bug found in Partition #2, where starttime > endtime doesn´t change the schedule but returns true instead of false. 
+Same bug can be found in border tests 3_1 and 3_2.
+
+1.b)
+
+Input space: starttime !< 0 && endtime < size (endtime != size && endtime !> size)
+
+With these partitions, we show opposite cases where the method should either return employees or not. 
+
+Partition #1: starttime <= endtime 
+   test_workingEmployees_part1: input: "starttime = 1, endtime = 4", 
+expected: "workingEmployees( int starttime, int endtime) = "{Alfa, Beta}" 
+
+Partition #2: starttime > endtime 
+   test_workingEmployees_part2: input: "starttime = 11, endtime = 4", 
+expected: "workingEmployees( int starttime, int endtime) = "{}"
+
+Partition #3: employee exist in the interval starttime to endtime 
+   test_workingEmployees_part3: input: "starttime = 8, endtime = 13", 
+expected: "workingEmployees( int starttime, int endtime) = "{Alfa, Beta}" 
+ 
+Partition #4: employee doesn´t exist in the interval starttime to endtime 
+   test_workingEmployees_part4: input: "starttime = 11, endtime = 20", 
+expected: "workingEmployees( int starttime, int endtime) = "{}"
+
+Border cases:
+
+(starttime <= endtime)
+   test_workingEmployees_border1_1: input: "starttime = 0, endtime = 0", 
+expected: "workingEmployees( int starttime, int endtime) = "{Alfa, Beta}" 
+   test_workingEmployees_border1_2: input: "starttime = 0, endtime = size-1", 
+expected: "workingEmployees( int starttime, int endtime) = "{ Alfa, Beta, Charlie }" 
+
+(starttime > endtime)
+   test_workingEmployees_border2_1: input: "starttime = 0, endtime = -1", 
+expected: "workingEmployees( int starttime, int endtime) = "{}" 
+   test_workingEmployees_border2_2: input: "starttime = size, endtime = size-1", 
+expected: "workingEmployees( int starttime, int endtime) = "{}" 
+   
+Found bugs: In test Partition #2, the method was supposed to return an empty string. 
+But instead it returned employees that worked after the starttime (Example we only get "Charlie" in the test_workingEmployees_border2_2() test.
+
