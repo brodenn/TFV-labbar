@@ -1,0 +1,9 @@
+We failed the first test with these values:
+
+Value: 343808108
+Array: [176792303, 343808108, 360288723, 464644550, 863108844, 921438464, 1298530144, 1639132990, 1718738594, 1833889642, 1945741070, 1959630864]
+
+We did some more testing and didn't find any bugs in contain, but we did see that binary search gave us the wrong answer.
+We investigated binary search and found out that the method checked the wrong side of the index.
+When the value was bigger it the looked at the left side instead of the right side and vice versa.
+So we just switched places on left and right in the binarysSearch code to fix the bug.

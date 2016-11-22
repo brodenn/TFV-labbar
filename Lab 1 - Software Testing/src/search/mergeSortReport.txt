@@ -1,0 +1,24 @@
+We failed the test and did some more testing. Implemented some prints:
+
+...
+if (!isSorted(sortedArray)) {
+				return false;
+			} else
+				System.out.println("Array: " + Arrays.toString(arrayClone));
+			System.out.println("Array: " + Arrays.toString(sortedArray));
+				return isPermutation(sortedArray, arrayClone);
+...
+
+prints this:
+Array: [122981579, 257454876, 1213112197, 1388401101, 1697207095, 1753875185, 1775863879, 2019112881]
+Array: [122981579, 1213112197, 1388401101, 1753875185, 2019112881]
+
+We discovered that the sortedArray contains less elements. So the sort method removed some elements.
+
+Looking more closely at sort we found this:
+	    int m = (from + to) / 2;
+	    int[] left = sort(array, from, m - 1);
+	    int[] right = sort(array, m + 1, to);
+	    
+Since left has the elements "from" to "m -1" and right have the elements "m + 1" to "to" none of the arrays will contain the element m.
+The fix was to make left go to "m" instead of "m-1"
